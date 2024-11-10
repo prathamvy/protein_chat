@@ -1,0 +1,10 @@
+deepspeed
+numpy
+pandas
+scikit-learn
+matplotlib
+torch
+transformers
+peft
+wandb
+tqdm
