@@ -36,7 +36,7 @@ class ProteinChat(nn.Module):
         inputs_embeds = combined_embedding.unsqueeze(0)
 
         output = self.llm(**prompt_enc, inputs_embeds=inputs_embeds)
-
+    
         return output
 
 class ProteinChatDataset(Dataset):

@@ -10,7 +10,11 @@ protein_encoder_model = AutoModel.from_pretrained("Bo1015/proteinglm-1b-mlm",
 tokenizer = AutoTokenizer.from_pretrained("lmsys/vicuna-13b-v1.5")
 llm_model = AutoModelForCausalLM.from_pretrained("lmsys/vicuna-13b-v1.5").to(device)
 
-lora_config = LoraConfig(r=8, lora_alpha=16, target_modules=["q_proj", "v_proj"], lora_dropout=0.05)
+lora_config = LoraConfig(r=8, 
+                        lora_alpha=16,
+                        target_modules=["q_proj", "v_proj"], 
+                        lora_dropout=0.05)
+
 llm_model = get_peft_model(llm_model, lora_config)
 
 learning_rate = 1e-5

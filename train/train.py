@@ -12,6 +12,8 @@ def load_data_from_csv(file_path):
     df = pd.read_csv(file_path)
     return df
 
+wandb.init(project="ppi")
+
 def train(model, dataloader, optimizer, scheduler, device, num_epochs=5):
     model.train()  
     model = model.to(device)
@@ -58,7 +60,6 @@ def train(model, dataloader, optimizer, scheduler, device, num_epochs=5):
             print("Protein encoder saved after final epoch")
 
 
-        wandb.log({"training_loss_curve": wandb.Image("training_loss_curve.png")})
 
     plt.plot(range(num_epochs), epoch_losses, label="Loss")
     plt.xlabel("Epochs")
@@ -68,9 +69,12 @@ def train(model, dataloader, optimizer, scheduler, device, num_epochs=5):
     plt.savefig("training_loss_curve.png")
     plt.close()
 
+    wandb.log({"training_loss_curve": wandb.Image("training_loss_curve.png")})
+
+
 if __name__ == "__main__":
 
-    file_path = 'ppi_data/final_protein_data.csv'
+    file_path = 'ppi_data/protein_train_data.csv'
     df = load_data_from_csv(file_path)
 
     prompts = [
